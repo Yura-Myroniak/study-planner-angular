@@ -1,1 +1,18 @@
-<p>subject-details works!</p>
+<h2>Subject Details</h2>
+
+<div *ngIf="subject; else nf">
+  <p><b>Title:</b> {{ subject.title }}</p>
+  <p *ngIf="subject.teacher"><b>Teacher:</b> {{ subject.teacher }}</p>
+
+  <h3>Tasks</h3>
+  <ul>
+    <li *ngFor="let t of tasks">
+      {{ t.title }} — <i>{{ t.status }}</i>
+      <span *ngIf="t.deadline"> ({{ t.deadline }})</span>
+    </li>
+  </ul>
+</div>
+
+<ng-template #nf>
+  <p>Subject not found.</p>
+</ng-template>
