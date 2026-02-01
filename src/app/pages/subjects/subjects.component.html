@@ -1,1 +1,14 @@
-<p>subjects works!</p>
+<h2>Subjects</h2>
+
+<form (ngSubmit)="add()" style="display:flex; gap:8px; flex-wrap:wrap;">
+  <input name="title" [(ngModel)]="title" placeholder="Subject title" required />
+  <input name="teacher" [(ngModel)]="teacher" placeholder="Teacher (optional)" />
+  <button type="submit">Add</button>
+</form>
+
+<ul>
+  <li *ngFor="let s of (subjects$ | async)">
+    <a [routerLink]="['/subjects', s.id]">{{ s.title }}</a>
+    <span *ngIf="s.teacher"> — {{ s.teacher }}</span>
+  </li>
+</ul>
