@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
+import { TasksService } from '../../core/services/tasks.service';
+import { TaskStatus } from '../../core/models/task.model';
 
 @Component({
   selector: 'app-tasks',
-  imports: [],
   templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.scss'
 })
 export class TasksComponent {
+  filter: TaskStatus | 'all' = 'all';
+  tasks$ = this.tasksService.tasks$;
 
+  constructor(private tasksService: TasksService) {}
+
+  setDone(id: string) {
+    this.tasksService.setStatus(id, 'done');
+  }
 }

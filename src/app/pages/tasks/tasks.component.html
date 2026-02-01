@@ -1,1 +1,18 @@
-<p>tasks works!</p>
+<h2>Tasks</h2>
+
+<label>
+  Filter:
+  <select [(ngModel)]="filter" name="filter">
+    <option value="all">all</option>
+    <option value="todo">todo</option>
+    <option value="in_progress">in_progress</option>
+    <option value="done">done</option>
+  </select>
+</label>
+
+<ul>
+  <li *ngFor="let t of ((tasks$ | async) | taskStatus: filter)">
+    {{ t.title }} — <b>{{ t.status }}</b>
+    <button (click)="setDone(t.id)" [disabled]="t.status === 'done'">Mark done</button>
+  </li>
+</ul>
